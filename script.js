@@ -1,9 +1,5 @@
-const H1 = document.querySelector(".H1");
-const para = document.querySelector(".para");
 const btn = document.querySelector(".btn");
 
-const h1Text = H1.innerText;
-const paraText = para.innerText;
 const btnText = btn.innerText;
 
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
