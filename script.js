@@ -4,29 +4,48 @@ const btn = document.querySelector(".btn");
 
 const h1Text = H1.innerText;
 const paraText = para.innerText;
-const btnText = btn.innerText;  
+const btnText = btn.innerText;
 
-const charachters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; //62 characters.
+const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 let iteration = 0;
+let interval = null;
 
-function randomText(){
-    const str = h1Text.split("").map((char, index) => {
+function randomText() {
+
+    const str = btnText.split("").map((char, index) => {
+
         if (index < iteration) {
-            return char
+            return char;
         }
-        return charachters.split("")[Math.floor(Math.random() * charachters.length)]
-    }).join("");
-    
-    H1.innerText = str;
 
-    iteration += 0.25
+        return characters[Math.floor(Math.random() * characters.length)];
+
+    }).join("");
+
+    btn.innerText = str;
+
+    iteration += 0.25;
+
+    if (iteration >= btnText.length) {
+        clearInterval(interval);
+        btn.innerText = btnText;
+    }
 }
 
-setInterval ( randomText, 30);
+btn.addEventListener("mouseenter", () => {
+
+    iteration = 0;
+
+    clearInterval(interval);
+
+    interval = setInterval(randomText, 30);
+
+});
 
 addEventListener("mousemove", (e) => {
-    console.log(e.clientX, e.clientY); 
+
     document.body.style.setProperty("--x", e.clientX + "px");
     document.body.style.setProperty("--y", e.clientY + "px");
+
 });
